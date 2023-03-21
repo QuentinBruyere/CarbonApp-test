@@ -4,28 +4,31 @@ import './App.css';
 
 function App() {
 
-  let filmRequest = "https://api.tvmaze.com/search/shows?q=girls";
+  let filmRequest = null ;
 
-  /*
-  // stocker la valeur de l'input qqpart
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
+  
 
   // afficher le resultat de la recherche
-  handleSubmit(event) {
-    alert('Valeur de la recherche ' + this.state.value);
+  function handleSubmit(event) {
+    // alert('Valeur de la recherche ' + this.state.value);
     event.preventDefault();
+    filmRequest = "https://api.tvmaze.com/search/shows?q=girls" + query;
+    console.log(query);
   }
-  */
-
-  let query = null;
 
   function Film() {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
+    const [query, setQuery] = useState([]);
   
+    // stocker la valeur de l'input qqpart
+    function handleChange(event) {
+      // console.log(event.target.value);
+      setQuery();
+      // query = event.target.value;
+    }
+
     // Note: the empty deps array [] means
     // this useEffect will run once
     // similar to componentDidMount()
@@ -75,23 +78,21 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <form method="GET">
-        <input className="searchBar" type="text" placeholder="Breaking Bad, Simpsons, Kill Bill..."></input>
-        <button type="submit" >Search</button>
-      </form>
-      <Film />
-    </div>
+    // <div className="App">
+    //   <form method="GET">
+    //     <input className="searchBar" type="text" placeholder="Breaking Bad, Simpsons, Kill Bill..."></input>
+    //     <button type="submit" >Search</button>
+    //   </form>
+    //   <Film />
+    // </div>
 
-    /*
     <div className="App">
-    <form method="GET" onSubmit={this.handleSubmit}>
-      <input className="searchBar" type="text" placeholder="Breaking Bad, Simpsons, Kill Bill..." onChange={this.handleChange}></input>
+    <form method="GET" onSubmit={handleSubmit}>
+      <input className="searchBar" type="text" placeholder="Breaking Bad, Simpsons, Kill Bill..." onChange={handleChange}></input>
       <button type="submit" >Search</button>
     </form>
     <Film />
     </div>
-    */
   )
 }
 
