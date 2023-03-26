@@ -14,8 +14,9 @@ function App() {
 
   // stocker la valeur de l'input qqpart
   function handleChange(event) {
-    // console.log(event.target.value);
+    
     setQuery(event.target.value);
+    console.log(event.target.value);
     // query = event.target.value;
   }
 
@@ -31,7 +32,7 @@ function App() {
         (result) => {
         setIsLoaded(true);
         setItems(result);
-        // console.log(result[0].show.name);
+        console.log(result[0].show.image.medium);
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -41,7 +42,7 @@ function App() {
         setError(error);
         }
     )
-    console.log(query);
+    console.dir(query);
   }
 
   return (
