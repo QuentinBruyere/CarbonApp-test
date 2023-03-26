@@ -34,7 +34,11 @@ const filmStyle = {
     },
 
     image: {
-
+        error: {
+            margin: "0",
+            width: "210px",
+            height: "295px",
+        }
     }
 }
 
@@ -51,7 +55,7 @@ if (error) {
             {items.map(item => (
             <li key={item.show.id} style={filmStyle.li}>
                 <a href={item.show.url} target="_blank" rel="noreferrer" title={item.show.name}>
-                    {item.show.image.medium ? <img src={item.show.image.medium} alt={item.show.name + `'s film image`} style={filmStyle.image}/> : <p>img not found</p>}
+                    {item.show.image && item.show.image.medium ? <img src={item.show.image.medium} alt={item.show.name + `'s film image`} style={filmStyle.image}/> : <p style={filmStyle.image.error}>img not found</p>}
                 </a>
                 {/* <div style={filmStyle.div}>
                     <h3 style={filmStyle.div.h3}>{item.show.name}</h3>
