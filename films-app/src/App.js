@@ -1,8 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import Film from './film';
-import './App.css';
 
+const appStyle = {
+    app: {
+        margin: "0",
+        padding: "0",
+        boxSizing: "border-box",
+        display: "flex",
+        flexFlow: "column nowrap",
+        alignItems: "center",
+    },
+    form: {
+        display: "Flex",
+        flexFlow: "row nowrap",
+        alignItems: "center",
+        marginTop: "10%",
+
+        input: {
+            width: "400px",
+            height: "50px",
+            fontSize: "1.5rem",
+            padding: "0 3%",
+            border: "1px solid grey"
+        },
+
+        button: {
+            height: "50px",
+            fontSize: "1.5rem"
+        }
+    }
+}
 
 function App() {
 
@@ -10,7 +37,7 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
   const [query, setQuery] = useState('');
-
+  const [searched, setSearched] = useState(false);
 
   // stocker la valeur de l'input qqpart
   function handleChange(event) {
@@ -24,6 +51,9 @@ function App() {
   function handleSubmit(event) {
     // alert('Valeur de la recherche ' + this.state.value);
     event.preventDefault();
+
+    setSearched(true);
+
     const filmRequest = "https://api.tvmaze.com/search/shows?q=" + query;
 
     fetch(filmRequest)
@@ -43,24 +73,21 @@ function App() {
         }
     )
     console.dir(query);
+    console.log(searched);
   }
 
-  return (
-    // <div className="App">
-    //   <form method="GET">
-    //     <input className="searchBar" type="text" placeholder="Breaking Bad, Simpsons, Kill Bill..."></input>
-    //     <button type="submit" >Search</button>
-    //   </form>
-    //   <Film />
-    // </div>
+  console.log(searched);
 
-    <div className="App">
-    <form method="GET" onSubmit={handleSubmit}>
-      <input className="searchBar" type="text" placeholder="Breaking Bad, Simpsons, Kill Bill..." onChange={handleChange}></input>
-      <button type="submit" >Search</button>
-    </form>
-    <Film error={error} isLoaded={isLoaded} items={items}/>
+  return (
+
+    <div className="App" style={appStyle.app}>
+        <form method="GET" onSubmit={handleSubmit} style={appStyle.form}>
+            <input className="searchBar" type="text" placeholder="Breaking Bad, Simpsons, Kill Bill..." onChange={handleChange} style={appStyle.form.input}></input>
+            <button type="submit" style={appStyle.form.button}>Search</button>
+        </form>
+        {searched ? <Film error={error} isLoaded={isLoaded} items={items}/> : null}
     </div>
+
   )
 }
 

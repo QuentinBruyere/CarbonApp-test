@@ -1,14 +1,44 @@
 import React from 'react';
 
-function Film({error, isLoaded, items}) {
+const filmStyle = {
+    ul: {
+        padding: "0",
+        margin: "0",
+        marginTop: "2rem",
+        display: "grid",
+        width: "100%",
+        justifyContent: "center",
+        gridTemplateColumns: "repeat(auto-fit, minmax(250px, auto))",
+        gridTemplateRows: "repeat(auto-fit)",
+        // gap: "auto"
+    },
 
-let filmStyle = {
     li: {
-        listStyle: "none"
+        position: "relative",
+        maxWidth: "210px",
+        listStyle: "none",
+        margin: "1rem",
+        textAlign: "center"
+    },
+
+    div: {
+        position: "absolute",
+        top: "0",
+        left: "0",
+        width: "100%",
+
+        h3: {
+            margin: "0",
+            // width:"100px"
+        },
+    },
+
+    image: {
+
     }
 }
 
-
+function Film({error, isLoaded, items}) {
 
 if (error) {
     return <div>Error: {error.message}</div>;
@@ -16,32 +46,20 @@ if (error) {
     return <div>Loading...</div>;
 } else {
 
-    // let filmList = getItem(result);
-    // let filmList = localStorage.getItem();
-    // console.log(filmList);
-    
-    console.log(items);
-    console.log(items[0].show.image.medium);
-
     return (
-    <ul>
-        {items.map(item => (
-        <li key={item.show.id} style={filmStyle.li}>
-            <h3>{item.show.name}</h3>
-            <p>{item.show.id}</p>
-
-            {/* <p>{item.show.image.medium}</p> */}
-
-            {item.show.image.medium ? <img src={item.show.image.medium} alt="MovieImage" /> : <p>img not found</p>}
-            {/* <img src={item.show.image.medium ? item.show.image.medium : "img not found"} alt="MoviePicture"/> */}
-
-        </li>
-        ))}
-    </ul>
-
-    // <div className="filmCard">
-    //   <h3 className="filmTitle">{items[0].show.name}</h3>
-    // </div>
+        <ul style={filmStyle.ul}>
+            {items.map(item => (
+            <li key={item.show.id} style={filmStyle.li}>
+                <a href={item.show.url} target="_blank" rel="noreferrer" title={item.show.name}>
+                    {item.show.image.medium ? <img src={item.show.image.medium} alt={item.show.name + `'s film image`} style={filmStyle.image}/> : <p>img not found</p>}
+                </a>
+                {/* <div style={filmStyle.div}>
+                    <h3 style={filmStyle.div.h3}>{item.show.name}</h3>
+                </div> */}
+                <h3 style={filmStyle.div.h3}>{item.show.name}</h3>
+            </li>
+            ))}
+        </ul>
     );
 }
 }
