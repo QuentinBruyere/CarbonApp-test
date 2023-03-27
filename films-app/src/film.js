@@ -29,7 +29,9 @@ const filmStyle = {
 
         h3: {
             margin: "0",
-            // width:"100px"
+            color: "#f0f0f0",
+            fontWeight: "600",
+            marginTop: "5px"
         },
     },
 

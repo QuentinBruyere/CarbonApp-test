@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import Header from './Header';
 import Film from './film';
 
 const appStyle = {
@@ -9,12 +10,13 @@ const appStyle = {
         display: "flex",
         flexFlow: "column nowrap",
         alignItems: "center",
+        background: "linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(48,48,48,1) 100%)",
+        minHeight: "100vh"
     },
     form: {
         display: "Flex",
         flexFlow: "row nowrap",
         alignItems: "center",
-        marginTop: "10%",
 
         input: {
             width: "400px",
@@ -81,6 +83,7 @@ function App() {
   return (
 
     <div className="App" style={appStyle.app}>
+        <Header/>
         <form method="GET" onSubmit={handleSubmit} style={appStyle.form}>
             <input className="searchBar" type="text" placeholder="Breaking Bad, Simpsons, Kill Bill..." onChange={handleChange} style={appStyle.form.input}></input>
             <button type="submit" style={appStyle.form.button}>Search</button>
@@ -90,5 +93,14 @@ function App() {
 
   )
 }
+
+// ChatGPT's response to load a font by a component
+const fontUrl = 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap';
+
+// Dynamically load the font stylesheet
+const link = document.createElement('link');
+link.rel = 'stylesheet';
+link.href = fontUrl;
+document.head.appendChild(link);
 
 export default App;
