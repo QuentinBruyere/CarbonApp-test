@@ -10,7 +10,6 @@ const filmStyle = {
         justifyContent: "center",
         gridTemplateColumns: "repeat(auto-fit, minmax(250px, auto))",
         gridTemplateRows: "repeat(auto-fit)",
-        // gap: "auto"
     },
 
     li: {
@@ -18,14 +17,7 @@ const filmStyle = {
         maxWidth: "210px",
         listStyle: "none",
         margin: "1rem",
-        textAlign: "center"
-    },
-
-    div: {
-        position: "absolute",
-        top: "0",
-        left: "0",
-        width: "100%",
+        textAlign: "center",
 
         h3: {
             margin: "0",
@@ -59,10 +51,7 @@ if (error) {
                 <a href={item.show.url} target="_blank" rel="noreferrer" title={item.show.name}>
                     {item.show.image && item.show.image.medium ? <img src={item.show.image.medium} alt={item.show.name + `'s film image`} style={filmStyle.image}/> : <p style={filmStyle.image.error}>img not found</p>}
                 </a>
-                {/* <div style={filmStyle.div}>
-                    <h3 style={filmStyle.div.h3}>{item.show.name}</h3>
-                </div> */}
-                <h3 style={filmStyle.div.h3}>{item.show.name}</h3>
+                <h3 style={filmStyle.li.h3}>{item.show.name}</h3>
             </li>
             ))}
         </ul>

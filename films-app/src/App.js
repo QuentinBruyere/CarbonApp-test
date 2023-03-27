@@ -23,12 +23,18 @@ const appStyle = {
             height: "50px",
             fontSize: "1.5rem",
             padding: "0 3%",
-            border: "1px solid grey"
+            border: "none",
+            borderRadius: "15px 0 0 15px",
+
         },
 
         button: {
             height: "50px",
-            fontSize: "1.5rem"
+            fontSize: "1.25rem",
+            borderRadius: "0 15px 15px 0",
+            border: "none",
+            backgroundColor: "#b0b0b0",
+            padding: "0 3%",
         }
     }
 }
@@ -45,13 +51,10 @@ function App() {
   function handleChange(event) {
     
     setQuery(event.target.value);
-    console.log(event.target.value);
-    // query = event.target.value;
   }
 
   // afficher le resultat de la recherche
   function handleSubmit(event) {
-    // alert('Valeur de la recherche ' + this.state.value);
     event.preventDefault();
 
     setSearched(true);
@@ -64,7 +67,6 @@ function App() {
         (result) => {
         setIsLoaded(true);
         setItems(result);
-        console.log(result[0].show.image.medium);
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -74,19 +76,15 @@ function App() {
         setError(error);
         }
     )
-    console.dir(query);
-    console.log(searched);
   }
-
-  console.log(searched);
 
   return (
 
     <div className="App" style={appStyle.app}>
         <Header/>
         <form method="GET" onSubmit={handleSubmit} style={appStyle.form}>
-            <input className="searchBar" type="text" placeholder="Breaking Bad, Simpsons, Kill Bill..." onChange={handleChange} style={appStyle.form.input}></input>
-            <button type="submit" style={appStyle.form.button}>Search</button>
+            <input className="searchBar" type="text" placeholder="Breaking Bad, Simpsons..." onChange={handleChange} style={appStyle.form.input}></input>
+            <button type="submit" style={appStyle.form.button}>search</button>
         </form>
         {searched ? <Film error={error} isLoaded={isLoaded} items={items}/> : null}
     </div>
